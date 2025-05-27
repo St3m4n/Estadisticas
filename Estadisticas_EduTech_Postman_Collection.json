@@ -1,0 +1,158 @@
+{
+  "info": {
+    "name": "Microservicio Estad\u00edsticas EduTech",
+    "_postman_id": "edutech-estadisticas-collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Generar reporte - Progreso Estudiantes",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"curso\": \"Matem\u00e1ticas 3\",\n  \"seccion\": \"Secci\u00f3n 1\",\n  \"evaluaciones\": [\n    {\n      \"estudianteId\": \"E001\",\n      \"nombre\": \"Ana Torres\",\n      \"notas\": [70, 50, 30]\n    },\n    {\n      \"estudianteId\": \"E002\",\n      \"nombre\": \"Luis Ram\u00edrez\",\n      \"notas\": [90, 85, 100]\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/reportes/progreso-estudiantes?generadoPor=admin@edutech.com",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "reportes",
+            "progreso-estudiantes"
+          ],
+          "query": [
+            {
+              "key": "generadoPor",
+              "value": "admin@edutech.com"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Generar reporte - Rendimiento Secciones",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"curso\": \"Biolog\u00eda\",\n  \"seccion\": \"Secci\u00f3n 2\",\n  \"evaluaciones\": [\n    {\n      \"estudianteId\": \"E001\",\n      \"nombre\": \"Valentina Soto\",\n      \"notas\": [65, 70, 80]\n    },\n    {\n      \"estudianteId\": \"E002\",\n      \"nombre\": \"Pedro N\u00fa\u00f1ez\",\n      \"notas\": [40, 50, 35]\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/reportes/rendimiento-secciones?generadoPor=admin@edutech.com",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "reportes",
+            "rendimiento-secciones"
+          ],
+          "query": [
+            {
+              "key": "generadoPor",
+              "value": "admin@edutech.com"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Generar reporte - Estudiantes Inscritos",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n  {\n    \"cursoId\": 101,\n    \"nombreCurso\": \"Matem\u00e1ticas I\",\n    \"seccionId\": 1,\n    \"nombreSeccion\": \"A\",\n    \"estudiantes\": [\n      { \"estudianteId\": \"E001\", \"nombre\": \"Ana Torres\" },\n      { \"estudianteId\": \"E002\", \"nombre\": \"Luis Ram\u00edrez\" }\n    ]\n  },\n  {\n    \"cursoId\": 102,\n    \"nombreCurso\": \"Historia\",\n    \"seccionId\": 2,\n    \"nombreSeccion\": \"B\",\n    \"estudiantes\": [\n      { \"estudianteId\": \"E003\", \"nombre\": \"Pedro N\u00fa\u00f1ez\" }\n    ]\n  }\n]"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/reportes/estudiantes-inscritos?generadoPor=admin@edutech.com",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "reportes",
+            "estudiantes-inscritos"
+          ],
+          "query": [
+            {
+              "key": "generadoPor",
+              "value": "admin@edutech.com"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Listar todos los reportes",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/api/reportes",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "reportes"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Obtener reporte por ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/api/reportes/1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "reportes",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Eliminar reporte por ID",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{base_url}}/api/reportes/1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "reportes",
+            "1"
+          ]
+        }
+      }
+    }
+  ]
+}
