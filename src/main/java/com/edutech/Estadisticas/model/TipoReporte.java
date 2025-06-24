@@ -1,4 +1,4 @@
-package com.edutech.Estadisticas.model;
+package com.edutech.estadisticas.model;
 
 public enum TipoReporte {
     ESTUDIANTES_INSCRITOS,

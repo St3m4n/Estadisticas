@@ -1,4 +1,4 @@
-package com.edutech.Estadisticas.model;
+package com.edutech.estadisticas.model;
 
 import jakarta.persistence.*;
 import lombok.*;
