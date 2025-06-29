@@ -1,4 +1,4 @@
-package com.example.estadisticas;
+package com.edutech.estadisticas;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
