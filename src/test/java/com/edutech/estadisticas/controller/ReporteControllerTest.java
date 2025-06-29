@@ -29,7 +29,7 @@ class ReporteControllerTest {
     private ReporteService reporteService;
 
     @Test
-    @DisplayName("POST /api/reportes/progreso-estudiantes - Debe retornar 200 OK")
+    @DisplayName("POST /api/v1/reportes/progreso-estudiantes - Debe retornar 200 OK")
     void generarReporteProgresoEstudiantes_DebeRetornar200() throws Exception {
         // Arrange
         Reporte reporteMock = new Reporte();
@@ -44,7 +44,7 @@ class ReporteControllerTest {
             .thenReturn(respuestaMock);
 
         // Act & Assert
-        mockMvc.perform(post("/api/reportes/progreso-estudiantes")
+        mockMvc.perform(post("/api/v1/reportes/progreso-estudiantes")
                 .param("generadoPor", "usuario@test.com")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"curso\":\"test\"}"))
@@ -57,7 +57,7 @@ class ReporteControllerTest {
     }
 
     @Test
-    @DisplayName("POST /api/reportes/rendimiento-secciones - Debe retornar 200 OK")
+    @DisplayName("POST /api/v1/reportes/rendimiento-secciones - Debe retornar 200 OK")
     void generarReporteRendimientoSecciones_DebeRetornar200() throws Exception {
         // Arrange
         Reporte reporteMock = new Reporte();
@@ -72,7 +72,7 @@ class ReporteControllerTest {
             .thenReturn(respuestaMock);
 
         // Act & Assert
-        mockMvc.perform(post("/api/reportes/rendimiento-secciones")
+        mockMvc.perform(post("/api/v1/reportes/rendimiento-secciones")
                 .param("generadoPor", "usuario@test.com")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"seccion\":\"test\"}"))
@@ -85,7 +85,7 @@ class ReporteControllerTest {
     }
 
     @Test
-    @DisplayName("POST /api/reportes/estudiantes-inscritos - Debe retornar 200 OK")
+    @DisplayName("POST /api/v1/reportes/estudiantes-inscritos - Debe retornar 200 OK")
     void generarReporteEstudiantesInscritos_DebeRetornar200() throws Exception {
         // Arrange
         Reporte reporteMock = new Reporte();
@@ -100,7 +100,7 @@ class ReporteControllerTest {
             .thenReturn(respuestaMock);
 
         // Act & Assert
-        mockMvc.perform(post("/api/reportes/estudiantes-inscritos")
+        mockMvc.perform(post("/api/v1/reportes/estudiantes-inscritos")
                 .param("generadoPor", "usuario@test.com")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"carrera\":\"test\"}"))
@@ -113,7 +113,7 @@ class ReporteControllerTest {
     }
 
     @Test
-    @DisplayName("GET /api/reportes - Debe retornar 200 OK")
+    @DisplayName("GET /api/v1/reportes - Debe retornar 200 OK")
     void listarReportes_DebeRetornar200() throws Exception {
         // Arrange
         List<Map<String, Object>> reportesMock = List.of(
@@ -123,7 +123,7 @@ class ReporteControllerTest {
         when(reporteService.obtenerTodosLosReportes()).thenReturn(reportesMock);
 
         // Act & Assert
-        mockMvc.perform(get("/api/reportes"))
+        mockMvc.perform(get("/api/v1/reportes"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$").isArray())
@@ -134,7 +134,7 @@ class ReporteControllerTest {
     }
 
     @Test
-    @DisplayName("GET /api/reportes/{id} - Debe retornar 200 OK cuando existe el reporte")
+    @DisplayName("GET /api/v1/reportes/{id} - Debe retornar 200 OK cuando existe el reporte")
     void obtenerReportePorId_DebeRetornar200_CuandoExiste() throws Exception {
         // Arrange
         Map<String, Object> reporteMock = Map.of(
@@ -146,7 +146,7 @@ class ReporteControllerTest {
             .thenReturn(ResponseEntity.ok(reporteMock));
 
         // Act & Assert
-        mockMvc.perform(get("/api/reportes/1"))
+        mockMvc.perform(get("/api/v1/reportes/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(1));
@@ -156,14 +156,14 @@ class ReporteControllerTest {
     }
 
     @Test
-    @DisplayName("GET /api/reportes/{id} - Debe retornar 404 NOT FOUND cuando no existe el reporte")
+    @DisplayName("GET /api/v1/reportes/{id} - Debe retornar 404 NOT FOUND cuando no existe el reporte")
     void obtenerReportePorId_DebeRetornar404_CuandoNoExiste() throws Exception {
         // Arrange
         when(reporteService.obtenerReportePorId(999L))
             .thenReturn(ResponseEntity.notFound().build());
 
         // Act & Assert
-        mockMvc.perform(get("/api/reportes/999"))
+        mockMvc.perform(get("/api/v1/reportes/999"))
                 .andExpect(status().isNotFound());
         
         // Verify interactions
@@ -171,14 +171,14 @@ class ReporteControllerTest {
     }
 
     @Test
-    @DisplayName("DELETE /api/reportes/{id} - Debe retornar 200 OK cuando se elimina exitosamente")
+    @DisplayName("DELETE /api/v1/reportes/{id} - Debe retornar 200 OK cuando se elimina exitosamente")
     void eliminarReporte_DebeRetornar200_CuandoSeEliminaExitosamente() throws Exception {
         // Arrange
         when(reporteService.eliminarReportePorId(1L))
             .thenReturn(ResponseEntity.ok().build());
 
         // Act & Assert
-        mockMvc.perform(delete("/api/reportes/1"))
+        mockMvc.perform(delete("/api/v1/reportes/1"))
                 .andExpect(status().isOk());
         
         // Verify interactions
@@ -186,14 +186,14 @@ class ReporteControllerTest {
     }
 
     @Test
-    @DisplayName("DELETE /api/reportes/{id} - Debe retornar 404 NOT FOUND cuando no existe el reporte")
+    @DisplayName("DELETE /api/v1/reportes/{id} - Debe retornar 404 NOT FOUND cuando no existe el reporte")
     void eliminarReporte_DebeRetornar404_CuandoNoExiste() throws Exception {
         // Arrange
         when(reporteService.eliminarReportePorId(999L))
             .thenReturn(ResponseEntity.notFound().build());
 
         // Act & Assert
-        mockMvc.perform(delete("/api/reportes/999"))
+        mockMvc.perform(delete("/api/v1/reportes/999"))
                 .andExpect(status().isNotFound());
         
         // Verify interactions
@@ -201,10 +201,10 @@ class ReporteControllerTest {
     }
 
     @Test
-    @DisplayName("POST /api/reportes/progreso-estudiantes - Debe retornar 400 BAD REQUEST sin parámetro generadoPor")
+    @DisplayName("POST /api/v1/reportes/progreso-estudiantes - Debe retornar 400 BAD REQUEST sin parámetro generadoPor")
     void generarReporteProgresoEstudiantes_DebeRetornar400_SinParametroGeneradoPor() throws Exception {
         // Act & Assert
-        mockMvc.perform(post("/api/reportes/progreso-estudiantes")
+        mockMvc.perform(post("/api/v1/reportes/progreso-estudiantes")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"curso\":\"test\"}"))
                 .andExpect(status().isBadRequest());
@@ -214,10 +214,10 @@ class ReporteControllerTest {
     }
 
     @Test
-    @DisplayName("POST /api/reportes/progreso-estudiantes - Debe retornar 400 BAD REQUEST sin body")
+    @DisplayName("POST /api/v1/reportes/progreso-estudiantes - Debe retornar 400 BAD REQUEST sin body")
     void generarReporteProgresoEstudiantes_DebeRetornar400_SinBody() throws Exception {
         // Act & Assert
-        mockMvc.perform(post("/api/reportes/progreso-estudiantes")
+        mockMvc.perform(post("/api/v1/reportes/progreso-estudiantes")
                 .param("generadoPor", "usuario@test.com")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
@@ -227,16 +227,16 @@ class ReporteControllerTest {
     }
 
     @Test
-    @DisplayName("POST /api/reportes/rendimiento-secciones - Debe retornar 400 BAD REQUEST con parámetros inválidos")
+    @DisplayName("POST /api/v1/reportes/rendimiento-secciones - Debe retornar 400 BAD REQUEST con parámetros inválidos")
     void generarReporteRendimientoSecciones_DebeRetornar400_ConParametrosInvalidos() throws Exception {
         // Act & Assert - sin parámetro generadoPor
-        mockMvc.perform(post("/api/reportes/rendimiento-secciones")
+        mockMvc.perform(post("/api/v1/reportes/rendimiento-secciones")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"seccion\":\"test\"}"))
                 .andExpect(status().isBadRequest());
 
         // Act & Assert - sin body
-        mockMvc.perform(post("/api/reportes/rendimiento-secciones")
+        mockMvc.perform(post("/api/v1/reportes/rendimiento-secciones")
                 .param("generadoPor", "usuario@test.com")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
@@ -246,16 +246,16 @@ class ReporteControllerTest {
     }
 
     @Test
-    @DisplayName("POST /api/reportes/estudiantes-inscritos - Debe retornar 400 BAD REQUEST con parámetros inválidos")
+    @DisplayName("POST /api/v1/reportes/estudiantes-inscritos - Debe retornar 400 BAD REQUEST con parámetros inválidos")
     void generarReporteEstudiantesInscritos_DebeRetornar400_ConParametrosInvalidos() throws Exception {
         // Act & Assert - sin parámetro generadoPor
-        mockMvc.perform(post("/api/reportes/estudiantes-inscritos")
+        mockMvc.perform(post("/api/v1/reportes/estudiantes-inscritos")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"carrera\":\"test\"}"))
                 .andExpect(status().isBadRequest());
 
         // Act & Assert - sin body
-        mockMvc.perform(post("/api/reportes/estudiantes-inscritos")
+        mockMvc.perform(post("/api/v1/reportes/estudiantes-inscritos")
                 .param("generadoPor", "usuario@test.com")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
